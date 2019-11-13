@@ -16,6 +16,8 @@ cubby4=12
 
 space1=False #space 1 is initially empty
 space2=False
+space3=False
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(cubby1, GPIO.OUT,initial=GPIO.LOW)
 GPIO.setup(cubby2, GPIO.OUT,initial=GPIO.LOW)
@@ -73,7 +75,10 @@ def EandD():
 
 Cubby1StoreButton = Button(master, text="GPIO 21 Cubby 1", command= cubby1Button)
 Cubby1StoreButton.grid(row=1, column=0)
-Cubby1StoreButton = Button(master, text="GPIO 20 Cubby 2", command= cubby2Button)
-Cubby1StoreButton.grid(row=1, column=1)
+Cubby2StoreButton = Button(master, text="GPIO 20 Cubby 2", command= cubby2Button)
+Cubby2StoreButton.grid(row=1, column=1)
+Cubby3StoreButton = Button(master, text="GPIO 16 Cubby 3", command= cubby3Button)
+Cubby3StoreButton.grid(row=1, column=2)
 ExitButton()
+
 master.mainloop()
