@@ -53,7 +53,17 @@ def cubby2Button():
 		GPIO.output(cubby2,GPIO.LOW)
 		space2=False
 		ONlabel2.config(text="Cubby Empty")
-		
+def cubby3Button():
+	global space3
+	if(space3==False):
+		GPIO.output(cubby3, GPIO.HIGH)
+		space3=True
+		ONlabel3.config(text = "Cubby ocupied") #Display it's full
+	else:
+		GPIO.output(cubby3, GPIO.LOW)
+		space3=False
+		ONlabel3.config(text="Cubby Empty")
+
 def ExitButton():
 	Exitbutton = Button(master, text="Exit", command= EandD)
 	Exitbutton.grid(row=1, column=8)
