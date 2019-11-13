@@ -30,6 +30,8 @@ ONlabel1 = Label(master, text="Cubby Empty (system start)")
 ONlabel1.grid(row=0, column=0)
 ONlabel2 = Label(master, text="Cubby Empty (system start)")
 ONlabel2.grid(row=0, column=1)
+ONlabel3 = Label(master, text="Cubby Empty (system start)")
+ONlabel3.grid(row=0, column=2)
 
 def cubby1Button():
 	global space1
