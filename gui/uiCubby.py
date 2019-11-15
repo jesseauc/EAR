@@ -13,7 +13,6 @@ cubby1=21
 cubby2=20
 cubby3=16
 cubby4=12
-cubby1Input= 26
 
 space1=False #space 1 is initially empty
 
@@ -22,7 +21,7 @@ GPIO.setup(cubby1, GPIO.OUT,initial=GPIO.LOW)
 GPIO.setup(cubby2, GPIO.OUT,initial=GPIO.LOW)
 GPIO.setup(cubby3, GPIO.OUT,initial=GPIO.LOW)
 GPIO.setup(cubby4, GPIO.OUT,initial=GPIO.LOW)
-GPIO.setup(cubby1Input, GPIO.IN)
+
 master = Tk()
 master.title("Assistant Robot GUI V2")
 master.geometry("600x100")
@@ -35,8 +34,6 @@ def cubby1Button():
 	global space1
 	if(space1==False):
 		GPIO.output(cubby1, GPIO.HIGH) #signal storage op.
-		while not GPIO.input(cubby1Input):
-			time.sleep(0.1)
 		space1=True           #space1 is occupied? True
 		print(space1)
 		ONlabel1.config(text = "Cubby ocupied") #Display it's full
