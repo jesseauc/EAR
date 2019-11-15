@@ -43,14 +43,20 @@ def cubby1Button():
 		GPIO.output(cubby1, GPIO.HIGH) #signal storage output.
 		while not GPIO.input(cubby1Input):
 			Cubby1StoreButton.config(state='disabled') #Not working
+			master.update()
 			time.sleep(0.1)
 		Cubby1StoreButton.config(state='normal')
+		master.update()
 		space1=True           #space1 is occupied? True
 		ONlabel1.config(text = "Cubby ocupied") #Display it's full
 	else:
 		GPIO.output(cubby1,GPIO.LOW)
 		while not GPIO.input(cubby1Input):
+			Cubby1StoreButton.config(state='disabled') #Not working
+			master.update()
 			time.sleep(0.1)
+		Cubby1StoreButton.config(state='normal')
+		master.update()
 		space1=False
 		ONlabel1.config(text="Cubby Empty")	
 
