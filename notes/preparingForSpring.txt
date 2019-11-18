@@ -1,0 +1,39 @@
+Tatro's lecture on preparing for spring
+-----------------------------------------------
+
+--Get things done early when you have ample motivation.
+
+
+--Assignments
+   -first day of class should add to boards.
+   -Problem change order.
+      what measurable metrics should we change to better proj.
+   -Problem statement revision
+      -Full detail what changes should be made to better fit problem.
+      -what did you learn? how do you better understand the problem?
+   -Device test plan
+      -what do you need to test?
+	-equiptment?
+        -various parameters i.e. temperature.
+   -Market Review
+      -where does this fit in society?
+      -brief market analysis.
+   -mid-term progress review
+      -should be done with the project at this point.
+        -deployable prototype
+      -show how you implemented needed changes pointed out by device test pln.
+   -Feature presentation report
+      -individual 6 minute presentation and written report.
+      -What did YOU do for your project? 
+      -Think of it as a performance review at your workplace.
+      -Positive, supportive, mentoring. Fine line. 
+   -Final prototype review
+      -final grade for hardware
+   -end of project documentation **Work on this all of spring!**
+      -past reports up to 150 pages. Avg 40-60.
+      -Add pictures. 
+      -you WILL make a PDF version.
+      -Tell the story societal prob.--->Prototype.
+      -HUGELY IMPORTANT. WILL BE ON WEBSITE.
+   -final prototype presentation
+      -Present final prototype to public.
