@@ -37,3 +37,4 @@ Tatro's lecture on preparing for spring
       -HUGELY IMPORTANT. WILL BE ON WEBSITE.
    -final prototype presentation
       -Present final prototype to public.
+##FOR ALEX## Look into nema 7 motor control
