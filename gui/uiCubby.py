@@ -18,6 +18,7 @@ cubby1Input=26
 space1=False #space 1 is initially empty
 space2=False
 space3=False
+space4=False
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(cubby1, GPIO.OUT,initial=GPIO.LOW)
@@ -35,7 +36,8 @@ ONlabel2 = Label(master, text="Cubby Empty (system start)")
 ONlabel2.grid(row=0, column=1)
 ONlabel3 = Label(master, text="Cubby Empty (system start)")
 ONlabel3.grid(row=0, column=2)
-
+ONlabel4 = Label(master, text="Cubby Empty (system start)")
+ONlabel4.grid(row=0, column=3)
 
 def cubby1Button():
 	global space1
@@ -129,6 +131,37 @@ def cubby3Button():
 		master.update()
 		space3=False
 		ONlabel3.config(text="Cubby Empty")
+def cubby4Button():
+	global space4
+	if(space4==False):
+		GPIO.output(cubby4, GPIO.HIGH) #signal storage op.
+		while not GPIO.input(cubby1Input):
+			Cubby1StoreButton.config(state='disabled') 
+			Cubby2StoreButton.config(state='disabled') 
+			Cubby3StoreButton.config(state='disabled') 
+			master.update()
+			time.sleep(0.1)
+		Cubby1StoreButton.config(state='normal')
+		Cubby2StoreButton.config(state='normal')
+		Cubby3StoreButton.config(state='normal')
+		master.update()
+		space4=True           #space1 is occupied? True
+		ONlabel4.config(text = "Cubby ocupied") #Display it's full
+	else:
+		GPIO.output(cubby4,GPIO.LOW)
+		while not GPIO.input(cubby1Input):
+			Cubby1StoreButton.config(state='disabled') 
+			Cubby2StoreButton.config(state='disabled') 
+			Cubby3StoreButton.config(state='disabled') 
+			master.update()
+			time.sleep(0.1)
+		Cubby1StoreButton.config(state='normal')
+		Cubby2StoreButton.config(state='normal')
+		Cubby3StoreButton.config(state='normal')
+		master.update()
+		space4=False
+		ONlabel4.config(text="Cubby Empty")
+
 
 
 def ExitButton():
@@ -144,6 +177,8 @@ Cubby2StoreButton = Button(master, text="GPIO 20 Cubby 2", command=cubby2Button)
 Cubby2StoreButton.grid(row=1, column=1, ipadx=20, ipady=20)
 Cubby3StoreButton = Button(master, text="GPIO 16 Cubby 3", command=cubby3Button)
 Cubby3StoreButton.grid(row=1, column=2, ipadx=20, ipady=20)
+Cubby4StoreButton = Button(master, text="GPIO XX Cubby 3", command=cubby4Button)
+Cubby4StoreButton.grid(row=1, column=3, ipadx=20, ipady=20)
 ExitButton()
 
 master.mainloop()
