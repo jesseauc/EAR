@@ -1,10 +1,25 @@
+/*
+Author: Angelica Smith-Evans
+        (add your name if you worked on this!)
 
-//declare variables
+The purpose of this code is to control the pathing of the robot but receiving 
+input from proximity sensors, and changing the direction of the robot's 
+trajectory through the motor control.
+
+This code is currently in it's bare bones stages. I've written so far what needs to be completed
+*/
+
+//////////////////////////////////////////////////////////////////////////////////////
+//                        Variable Declaration Section                              //
+//////////////////////////////////////////////////////////////////////////////////////
+//Speed Control
+//**need to do: make sure these configurations work
   int vSpeed = 110;        // MAX 255
   int turn_speed = 230;    // MAX 255 
   int turn_delay = 10;
   
-//L293 Connection   
+//Motor Control Connections
+//**need to do: make sure these connections match what's on the board
   const int motorA1      = 8;  
   const int motorA2      = 10; 
   const int motorAspeed  = 9;
@@ -12,14 +27,19 @@
   const int motorB2      = 13; 
   const int motorBspeed  = 11;
 
-//Sensor Connection
+//Proximity Sensor Connections
+//**need to do: make sure these connections match the board
   const int left_sensor_pin =A0; // analog pin used to connect the sharp sensor
   const int right_sensor_pin =A1; 
   int left_sensor_state = 0; // variable to store the values from sensor(initially zero)
   int right_sensor_state = 0;
 
+//////////////////////////////////////////////////////////////////////////////////////
+//                                Pin Set-up Section                                //
+//////////////////////////////////////////////////////////////////////////////////////
 void setup() 
 {
+  //**need to do: make sure these connections match the board
   pinMode(motorA1, OUTPUT);
   pinMode(motorA2, OUTPUT);
   pinMode(motorB1, OUTPUT);
@@ -30,8 +50,19 @@ void setup()
   delay(3000);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////
+//                             Pathing Control Section                              //
+//////////////////////////////////////////////////////////////////////////////////////
 void loop()
 {
+  
+//**need to do: implement the code as i envisioned it
+//step 1: line following of 2 IR sensors (on front of chassis)
+//step 2: line following of 2 IR sensors (on back of chassis)
+//step 3: line following of all 4 IR sensors (on front and back)
+//        implement a mode bit which traces if bot moving forward or backward
+//        implement a counter which traces the mode bit switching to trace current point of the robot
+
   
 left_sensor_state = analogRead(left_sensor_pin);// reads the value of the sharp sensor
 right_sensor_state = analogRead(right_sensor_pin);
@@ -91,5 +122,5 @@ if(right_sensor_state < 500 && left_sensor_state < 500)
   analogWrite (motorBspeed, 0);
   } 
   
-}
+}//end of main
 
