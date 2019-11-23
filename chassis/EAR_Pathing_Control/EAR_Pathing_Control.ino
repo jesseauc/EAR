@@ -15,24 +15,25 @@ This code is currently in it's bare bones stages. I've written so far what needs
 //Speed Control
 //**need to do: make sure these configurations work
   int vSpeed = 110;        // MAX 255
-  int turn_speed = 230;    // MAX 255 
+  int turn_speed = 180;    // MAX 255 
   int turn_delay = 10;
   
 //Motor Control Connections
-//**need to do: make sure these connections match what's on the board
-  const int motorA1      = 8;  
-  const int motorA2      = 10; 
-  const int motorAspeed  = 9;
-  const int motorB1      = 12; 
-  const int motorB2      = 13; 
-  const int motorBspeed  = 11;
+// Left Wheel Motor
+  int enA = 10;               //enable A pin connected to UNO pin 10 to enable LW Motor Driver
+  int in1 = 9;                //in1 pin connected to UNO pin 9 to control LW Motor
+  int in2 = 8;                //in2 pin connected to UNO pin 8 to control LW Motor
+// Right Wheel Motor
+  int enB = 5;                //enable B pin connected to UNO pin 5 to enable RW Motor Driver
+  int in3 = 7;                //in3 pin connected to UNO pin 7 to control RW Motor
+  int in4 = 6;                //in4 pin connected to UNO pin 6 to control RW Motor
 
 //Proximity Sensor Connections
 //**need to do: make sure these connections match the board
-  const int left_sensor_pin =A0; // analog pin used to connect the sharp sensor
-  const int right_sensor_pin =A1; 
-  int left_sensor_state = 0; // variable to store the values from sensor(initially zero)
-  int right_sensor_state = 0;
+  const int front_left_IR = A0;             // connect the front left IR sensor to pin A0
+  const int front_right_IR = A1;            // connect the front right IR sensor to pin A1
+  int front_left_IR_state = 0;              // variable to store the values from front left sensor
+  int front_right_IR_state = 0;             // variable to store the values from front right sensor
 
 //////////////////////////////////////////////////////////////////////////////////////
 //                                Pin Set-up Section                                //
@@ -40,14 +41,13 @@ This code is currently in it's bare bones stages. I've written so far what needs
 void setup() 
 {
   //**need to do: make sure these connections match the board
-  pinMode(motorA1, OUTPUT);
-  pinMode(motorA2, OUTPUT);
-  pinMode(motorB1, OUTPUT);
-  pinMode(motorB2, OUTPUT);
+  pinMode(in1, OUTPUT);
+  pinMode(in2, OUTPUT);
+  pinMode(in3, OUTPUT);
+  pinMode(in4, OUTPUT);
 
-  Serial.begin(9600);
-
-  delay(3000);
+  Serial.begin(9600);                       // starts the serial monitor (data rate=9600bps)  
+  delay(3000);                              // wait 3 seconds before starting main code execution
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -58,68 +58,66 @@ void loop()
   
 //**need to do: implement the code as i envisioned it
 //step 1: line following of 2 IR sensors (on front of chassis)
-//step 2: line following of 2 IR sensors (on back of chassis)
-//step 3: line following of all 4 IR sensors (on front and back)
-//        implement a mode bit which traces if bot moving forward or backward
+//step 2: implement a mode bit which traces if bot moving forward or backward
 //        implement a counter which traces the mode bit switching to trace current point of the robot
 
   
-left_sensor_state = analogRead(left_sensor_pin);// reads the value of the sharp sensor
-right_sensor_state = analogRead(right_sensor_pin);
+front_left_IR_state = analogRead(front_left_IR);// reads the value of the sharp sensor
+front_right_IR_state = analogRead(front_right_IR);
 
 //checks for line detection from the left side IR sensor
-if(right_sensor_state > 500 && left_sensor_state < 500)
+if(front_right_IR_state > 500 && front_left_IR_state < 500)
   {
   Serial.println("turning right");
 
-  digitalWrite (motorA1,LOW);
-  digitalWrite(motorA2,HIGH);                       
-  digitalWrite (motorB1,LOW);
-  digitalWrite(motorB2,HIGH);
+  digitalWrite (in1,LOW);
+  digitalWrite(in2,HIGH);                       
+  digitalWrite (in3,LOW);
+  digitalWrite(in4,HIGH);
 
-  analogWrite (motorAspeed, vSpeed);
-  analogWrite (motorBspeed, turn_speed);
+  analogWrite (enA, vSpeed);
+  analogWrite (enB, turn_speed);
   }
   
 //checks for line detection from the left side IR sensor
-if(right_sensor_state < 500 && left_sensor_state > 500)
+if(front_right_IR_state < 500 && front_left_IR_state > 500)
   {
   Serial.println("turning left");
   
-  digitalWrite (motorA1,HIGH);
-  digitalWrite(motorA2,LOW);                       
-  digitalWrite (motorB1,HIGH);
-  digitalWrite(motorB2,LOW);
+  digitalWrite (in1,HIGH);
+  digitalWrite(in2,LOW);                       
+  digitalWrite (in3,HIGH);
+  digitalWrite(in4,LOW);
 
-  analogWrite (motorAspeed, turn_speed);
-  analogWrite (motorBspeed, vSpeed);
+  analogWrite (enA, turn_speed);
+  analogWrite (enB, vSpeed);
 
   delay(turn_delay);
   }
   
 //checks for no line detection from either side
-if(right_sensor_state > 500 && left_sensor_state > 500)
+if(front_right_IR_state > 500 && front_left_IR_state > 500)
   {
   Serial.println("going forward");
 
-  digitalWrite (motorA2,LOW);
-  digitalWrite(motorA1,HIGH);                       
-  digitalWrite (motorB2,HIGH);
-  digitalWrite(motorB1,LOW);
-
-  analogWrite (motorAspeed, vSpeed);
-  analogWrite (motorBspeed, vSpeed);
+  digitalWrite(in1,HIGH); 
+  digitalWrite (in2,LOW);                      
+  digitalWrite(in3,LOW);
+  digitalWrite (in4,HIGH);
+ 
+  analogWrite (enA, vSpeed);
+  analogWrite (enB, vSpeed);
 
   delay(turn_delay);
   }
 
 //checks for line detection from both sides and stops robot if true
-if(right_sensor_state < 500 && left_sensor_state < 500)
+if(front_right_IR_state < 500 && front_left_IR_state < 500)
   { 
   Serial.println("stop");
   
-  analogWrite (motorAspeed, 0);
-  analogWrite (motorBspeed, 0);
+  analogWrite (enA, 0);
+  analogWrite (enB, 0);
   } 
   
 }//end of main
