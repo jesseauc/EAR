@@ -14,7 +14,7 @@ This code is currently in it's bare bones stages. I've written so far what needs
 //////////////////////////////////////////////////////////////////////////////////////
 //Speed Control
   int vSpeed = 110;                  // MAX 255
-  int turn_speed = 180;              // MAX 255 
+  int turn_speed = 230;              // MAX 255 
   int turn_delay = 10;
   
 //Motor Control Connections
