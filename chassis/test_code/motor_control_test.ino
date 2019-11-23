@@ -1,6 +1,9 @@
-// taken from online to serve as a motor, H bridge, and arduino test. Don't actually use this for our final code.
+/* This code serves as a motor, H bridge, and arduino test.
+   In this code there are three different tests that help us understand and test our components
+   for our project.
+*/
 
-// connect motor controller pins to Arduino digital pins
+// Connect motor controller pins to Arduino digital pins
 // Left Wheel Motor
 int enA = 10;               //enable A pin connected to UNO pin 10 to enable LW Motor Driver
 int in1 = 9;                //in1 pin connected to UNO pin 9 to control LW Motor
@@ -99,10 +102,49 @@ void demoTwo()
   digitalWrite(in3, LOW);
   digitalWrite(in4, LOW);  
 }
+void demoThree()
+{
+  Serial.println("going forward");
+
+  digitalWrite(in1,LOW); 
+  digitalWrite (in2,HIGH);                      
+  digitalWrite(in3,HIGH);
+  digitalWrite (in4,LOW);
+ 
+  analogWrite (enA, 110);
+  analogWrite (enB, 110);
+  }
+ /*
+  //turn robot to right
+  Serial.println("turning right");
+
+  digitalWrite (in1,HIGH);
+  digitalWrite(in2,LOW);                       
+  digitalWrite (in3,HIGH);
+  digitalWrite(in4,LOW);
+
+  analogWrite (enA, 110);
+  analogWrite (enB, 230);
+*/ 
+/* 
+   //turn robot to left
+   Serial.println("turning left");
+
+  digitalWrite (in1,LOW);
+  digitalWrite(in2,HIGH);                       
+  digitalWrite (in3,LOW);
+  digitalWrite(in4,HIGH);
+
+  analogWrite (enA, 230);
+  analogWrite (enB, 110);
+*/
+  
+}
 
 void loop()
 {
-  demoOne();
+  //demoOne();    //will not run demoOne at this stage
   //demoTwo();    //will not run demoTwo at this stage
-  delay(1000);    //wait 1 sec
+  demoThree();
+  delay(500);    //wait 1 sec
 }
