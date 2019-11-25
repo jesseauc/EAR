@@ -61,7 +61,7 @@ front_left_IR_state = analogRead(front_left_IR);    //read value from FL sensor 
 front_right_IR_state = analogRead(front_right_IR);  //read value from FR sensor and store value in front_right_IR_state
 
 //left side IR sensor detects black line, right side does not
-if(front_right_IR_state > 500 && front_left_IR_state < 500)
+if(front_right_IR_state < 500 && front_left_IR_state > 500)
   {
   Serial.println("turning right");
 
@@ -75,7 +75,7 @@ if(front_right_IR_state > 500 && front_left_IR_state < 500)
   }
   
 //right side IR sensor detects black line, left side does not
-if(front_right_IR_state < 500 && front_left_IR_state > 500)
+if(front_right_IR_state > 500 && front_left_IR_state < 500)
   {
   Serial.println("turning left");
   
@@ -91,7 +91,7 @@ if(front_right_IR_state < 500 && front_left_IR_state > 500)
   }
   
 //neither left or right IR sensors detect black line
-if(front_right_IR_state > 500 && front_left_IR_state > 500)
+if(front_right_IR_state < 500 && front_left_IR_state < 500)
   {
   Serial.println("going forward");
 
@@ -107,7 +107,7 @@ if(front_right_IR_state > 500 && front_left_IR_state > 500)
   }
 
 //if front left and front right IR sensors detect line, stop motors
-if(front_right_IR_state < 500 && front_left_IR_state < 500)
+if(front_right_IR_state > 500 && front_left_IR_state > 500)
   { 
   Serial.println("stop");
   
