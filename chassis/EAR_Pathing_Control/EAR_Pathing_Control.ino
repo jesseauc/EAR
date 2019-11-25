@@ -63,12 +63,12 @@ front_right_IR_state = analogRead(front_right_IR);  //read value from FR sensor 
 //left side IR sensor detects black line, right side does not
 if(front_right_IR_state < 500 && front_left_IR_state > 500)
   {
-  Serial.println("turning right");
+  Serial.println("turning left");
 
   digitalWrite (in1,HIGH);
   digitalWrite(in2,LOW);                       
-  digitalWrite (in3,HIGH);
-  digitalWrite(in4,LOW);
+  digitalWrite (in3,LOW);
+  digitalWrite(in4,HIGH);
 
   analogWrite (left_wheel_enable, vSpeed);
   analogWrite (right_wheel_enable, turn_speed);
@@ -77,12 +77,12 @@ if(front_right_IR_state < 500 && front_left_IR_state > 500)
 //right side IR sensor detects black line, left side does not
 if(front_right_IR_state > 500 && front_left_IR_state < 500)
   {
-  Serial.println("turning left");
+  Serial.println("turning right");
   
-  digitalWrite (in1,LOW);
-  digitalWrite(in2,HIGH);                       
-  digitalWrite (in3,LOW);
-  digitalWrite(in4,HIGH);
+  digitalWrite(in1,LOW); 
+  digitalWrite (in2,HIGH);                      
+  digitalWrite(in3,LOW);
+  digitalWrite (in4,HIGH);
 
   analogWrite (left_wheel_enable, turn_speed);
   analogWrite (right_wheel_enable, vSpeed);
@@ -97,8 +97,8 @@ if(front_right_IR_state < 500 && front_left_IR_state < 500)
 
   digitalWrite(in1,LOW); 
   digitalWrite (in2,HIGH);                      
-  digitalWrite(in3,HIGH);
-  digitalWrite (in4,LOW);
+  digitalWrite(in3,LOW);
+  digitalWrite (in4,HIGH);
  
   analogWrite (left_wheel_enable, vSpeed);
   analogWrite (right_wheel_enable, vSpeed);
