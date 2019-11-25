@@ -1,11 +1,9 @@
 /*
 Author: Angelica Smith-Evans
         
-
 The purpose of this code is to control the pathing of the robot but receiving 
 input from proximity sensors, and changing the direction of the robot's 
 trajectory through the motor control.
-
 This code is currently in it's bare bones stages. I've written so far what needs to be completed
 */
 
@@ -13,8 +11,8 @@ This code is currently in it's bare bones stages. I've written so far what needs
 //                        Variable Declaration Section                              //
 //////////////////////////////////////////////////////////////////////////////////////
 //Speed Control
-  int vSpeed = 110;                  // MAX 255
-  int turn_speed = 230;              // MAX 255 
+  int vSpeed = 80;                  // MAX 255
+  int turn_speed = 170;              // MAX 255 
   int turn_delay = 10;
   
 //Motor Control Connections
@@ -60,27 +58,27 @@ void loop()
 front_left_IR_state = analogRead(front_left_IR);    //read value from FL sensor and store value in front_left_IR_state 
 front_right_IR_state = analogRead(front_right_IR);  //read value from FR sensor and store value in front_right_IR_state
 
-//left side IR sensor detects black line, right side does not
-if(front_right_IR_state < 500 && front_left_IR_state > 500)
+//right side IR sensor detects black line, left side does not
+if(front_right_IR_state > 500 && front_left_IR_state < 500)
   {
-  Serial.println("turning left");
+  Serial.println("turning left--right side IR off");
 
-  digitalWrite (in1,HIGH);
-  digitalWrite(in2,LOW);                       
-  digitalWrite (in3,LOW);
-  digitalWrite(in4,HIGH);
+  digitalWrite(in1,LOW); 
+  digitalWrite (in2,HIGH);                      
+  digitalWrite(in3,LOW);
+  digitalWrite (in4,HIGH);
 
   analogWrite (left_wheel_enable, vSpeed);
   analogWrite (right_wheel_enable, turn_speed);
   }
   
-//right side IR sensor detects black line, left side does not
-if(front_right_IR_state > 500 && front_left_IR_state < 500)
+//left side IR sensor detects black line, right side does not
+if(front_right_IR_state < 500 && front_left_IR_state > 500)
   {
-  Serial.println("turning right");
+  Serial.println("turning right--left side IR off");
   
-  digitalWrite(in1,LOW); 
-  digitalWrite (in2,HIGH);                      
+  digitalWrite(in1,HIGH); 
+  digitalWrite (in2,LOW);                      
   digitalWrite(in3,LOW);
   digitalWrite (in4,HIGH);
 
@@ -115,7 +113,6 @@ if(front_right_IR_state > 500 && front_left_IR_state > 500)
   analogWrite (right_wheel_enable, 0);
   } 
   
-  delay(1000); //run through code every 1 second
+  delay(300); //run through code every 1 second
         
 }//end of main
-
